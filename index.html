@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- //移动端项目 -->
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <title>
+    listen to my heart 音乐播放
+  </title>
+</head>
+<body>
+  <div id="MusicPlay">
+    <div class="MusicPlay_Warp">
+      <header class="top">
+        <span>Listen to my heart</span>
+        <div class="top_index"><input type="text" class="index_d" v-model='search_song'
+            @keyup.enter='search_song_enter'></div>
+      </header>
+      <div class="center">
+        <div id="C_left">
+          <h5 v-show='Commentshow' id="title_comment">热门评论</h5>
+          <dl v-for='comments in hotComments'><img :src="comments.user.avatarUrl">
+            <dt>{{comments.user.nickname}}</dt>
+              <dd>{{comments.content}}</dd>
+          </dl>
+        </div>
+        <div id="C_right">
+          <div id="R_top" v-show='show_result'>搜索 "{{search_song_show}}"</div>
+          <div id="R_bot">
+            <ul>
+              <li v-for='item in songs'>
+                <a href="javascript:;" @click="playMusic(item.id)" id="NoPic_a">{{ item.name }}</a>
+               <a href="javascript:;" id="_mv" @click="playMvId(item.mvid)" v-show='item.mvid!=0'>mv</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <audio id="audios_s" :src="musicURL" controls='controls' autoplay='autoplay'></audio>
+      </footer>
+    </div>
+    <div id='video_Play' v-if='mvshows'>
+      <span @click='mvclose'>X</span>
+      <video :src="MvURL" controls='controls'></video>
+    </div>
+  
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
