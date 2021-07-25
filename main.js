@@ -16,7 +16,7 @@ new Vue({
         search_song_enter() {
 
             this.search_song_show = this.search_song;
-            this.show_result = !this.show_result;
+            this.show_result = true;
             axios.get("https://autumnfish.cn/search?keywords=" + this.search_song)
                 .then(response => {
                     this.songs = response.data.result.songs;
@@ -25,7 +25,7 @@ new Vue({
                 })
         },
         playMusic(musicId) {
-            this.Commentshow = !this.Commentshow;
+            this.Commentshow = true;
             axios.get("https://autumnfish.cn/song/url?id=" + musicId)
                 .then(response => {
                     this.musicURL = response.data.data[0].url;
